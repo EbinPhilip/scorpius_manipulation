@@ -1,0 +1,1 @@
+scorpius_manipulation_demo/SceneObject[] objects
