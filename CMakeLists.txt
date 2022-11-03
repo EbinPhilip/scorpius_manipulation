@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(scorpius_manipulation_demo)
+project(scorpius_manipulation)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -58,11 +58,10 @@ add_message_files(
 )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  SceneUpdate.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -77,6 +76,7 @@ generate_messages(
   std_msgs  # Or other packages containing msgs
   sensor_msgs
   shape_msgs
+  pcl_object_extraction
 )
 
 ################################################
@@ -110,7 +110,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES scorpius_manipulation_demo
+#  LIBRARIES scorpius_manipulation
 CATKIN_DEPENDS 
     rospy
     std_msgs
@@ -132,7 +132,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/scorpius_manipulation_demo.cpp
+#   src/${PROJECT_NAME}/scorpius_manipulation.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -143,7 +143,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/scorpius_manipulation_demo_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/scorpius_manipulation_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -207,7 +207,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_scorpius_manipulation_demo.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_scorpius_manipulation.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

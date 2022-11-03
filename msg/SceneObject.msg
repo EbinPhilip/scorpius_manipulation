@@ -2,3 +2,4 @@ string name
 string type
 sensor_msgs/PointCloud2 cloud
 shape_msgs/Mesh mesh
+pcl_object_extraction/ObjectBoundingBox boundingBox

@@ -1,1 +1,1 @@
-# scorpius_manipulation_demo
+# scorpius_manipulation
