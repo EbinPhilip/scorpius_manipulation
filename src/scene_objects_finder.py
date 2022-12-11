@@ -14,13 +14,15 @@ class SceneObjectsFinder:
     def __init__(self,
                  objectDetectionServicePath: str = 'object_detection_service',
                  objectExtractionServicePath: str = 'object_extraction_service',
-                 meshCreationServicePath: str = 'mesh_creation_service'):
+                 meshCreationServicePath: str = 'mesh_creation_service',
+                 interestedObjects: list = ['apple', 'banana', 'bottle', 'cup']):
         self.objectDetectionService = rospy.ServiceProxy(
             objectDetectionServicePath, ObjectDetection)
         self.objectExtractionService = rospy.ServiceProxy(
             objectExtractionServicePath, ObjectExtraction)
         self.meshCreationService = rospy.ServiceProxy(
             meshCreationServicePath, MeshCreation)
+        self.interestedObjects = interestedObjects
 
     def getSceneObjects(self, imageInput: Image, cloudInput: PointCloud2) -> SceneObjectArray:
         image = copy.copy(imageInput)
@@ -28,6 +30,7 @@ class SceneObjectsFinder:
 
         detectRequest = ObjectDetectionRequest()
         detectRequest.image = image
+        detectResponse: ObjectDetectionResponse
         detectResponse = self.objectDetectionService(detectRequest)
 
         sceneObjects = SceneObjectArray()
@@ -35,6 +38,8 @@ class SceneObjectsFinder:
         object:DetectedObject
         for object in detectResponse.detectedObjects.box:
             box = object.box
+            if object.name not in self.interestedObjects:
+                continue
             extractRequest = ObjectExtractionRequest()
             extractRequest.inputCloud = cloud
             extractRequest.boundingBox = box

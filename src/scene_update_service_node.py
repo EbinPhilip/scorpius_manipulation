@@ -48,7 +48,7 @@ def updateScene(request:SceneUpdateRequest)->SceneUpdateResponse:
         broadcaster.sendTransform(tfMessage)
 
     sceneUpdateResponse = SceneUpdateResponse()
-    sceneUpdateResponse.status = True
+    sceneUpdateResponse.objects = sceneObjectArray
     return sceneUpdateResponse
 
 if __name__ == '__main__':
