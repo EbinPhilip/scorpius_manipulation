@@ -42,8 +42,10 @@ if __name__ == "__main__":
 
     arm.moveToPose("place")
 
+    request = SceneUpdateRequest()
+    request.fixedFrame = 'base_link'
     response:SceneUpdateResponse
-    response = sceneUpdateService.call(SceneUpdateRequest())
+    response = sceneUpdateService.call(request)
 
     scene = PlanningSceneInterface()
 
