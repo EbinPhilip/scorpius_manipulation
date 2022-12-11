@@ -39,13 +39,12 @@ def updateScene(request:SceneUpdateRequest)->SceneUpdateResponse:
         return
 
     sceneObjectArray = sceneObjectsFinder.getSceneObjects(image, cloud)
-    parentFrame = request.fixedFrame
-    sceneUpdater.updateScene(sceneObjectArray, parentFrame)
+    sceneUpdater.updateScene(sceneObjectArray, 'base_link')
 
     sceneObject:SceneObject
     for sceneObject in sceneObjectArray.objects:
         tfMessage = graspCalculator.getGrasp(sceneObject.boundingBox,
-                parentFrame=parentFrame, childFrameName=sceneObject.name)
+                parentFrame='base_link', childFrameName=sceneObject.name)
         broadcaster.sendTransform(tfMessage)
 
     sceneUpdateResponse = SceneUpdateResponse()

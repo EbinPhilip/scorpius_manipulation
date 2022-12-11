@@ -14,10 +14,14 @@ class GraspCalculator:
         pose.transform.translation.y = (box.ymax+box.ymin)/2.0
         pose.transform.translation.z = (box.zmax+box.zmin)/2.0
 
-        if (((box.xmax-box.xmin)/(box.ymax-box.ymin)) >= 0.7):
-            q = quaternion_from_euler(0,1.5707, 0)
-        else:
-            q = quaternion_from_euler(1.5707,1.5707, 0)
+        # # for scorpius robotic arm
+        # if (((box.xmax-box.xmin)/(box.ymax-box.ymin)) >= 0.7):
+        #     q = quaternion_from_euler(0,1.5707, 0)
+        # else:
+        #     q = quaternion_from_euler(1.5707,1.5707, 0)
+
+        # for archie
+        q = quaternion_from_euler(0, 0, 0)
         
         pose.transform.rotation.x = q[0]
         pose.transform.rotation.y = q[1]

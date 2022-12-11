@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     robot = moveit_commander.RobotCommander()
     scene = moveit_commander.PlanningSceneInterface()
-    group_name = "scorpius_arm"
+    group_name = "sting_arm"
     move_group = moveit_commander.MoveGroupCommander(group_name)
 
 
